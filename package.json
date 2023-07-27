@@ -22,7 +22,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "ts": "tsc --noEmit --incremental",
+    "lint": "eslint ./src",
+    "format": "prettier --write ./src",
+    "eject": "react-scripts eject",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": [
@@ -54,7 +58,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-storybook": "^0.6.12",
-    "husky": "^8.0.3",
+    "husky": "^8.0.0",
     "prettier": "^2.8.8"
   }
 }
