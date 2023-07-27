@@ -9,3 +9,15 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+
+.app {
+  &__main {
+    min-height: calc(100vh - 160px);
+  }
+}
+
+// Import local styles
+@import './components/';
+
+// Import Bootstrap and its default variables
+@import '~bootstrap/scss/bootstrap.scss';
