@@ -3,18 +3,20 @@ import React, { useEffect, useState, FunctionComponent } from 'react'
 import { CardItem } from 'src/types'
 import Card from 'src/components/Card'
 import { dummyData } from 'src/utils/dummy'
+import { shuffle } from 'src/utils/shuffle'
 //import { useLocation } from 'react-router-dom'
 
 const Game: FunctionComponent = () => {
   //const location = useLocation()
-  const [cards] = useState<CardItem[]>([
-    ...dummyData.entries.slice(0, 3),
-    ...dummyData.entries.slice(0, 3),
-  ])
+  const [cards, setCards] = useState<CardItem[]>([])
   const [openCards, setOpenCards] = useState<number[]>([])
   const [hits, setHits] = useState<number>(0)
   const [mistakes, setMistakes] = useState<number>(0)
   const [matchCards, setMatchCards] = useState<Record<string, boolean>>({})
+
+  const shuffleArray = (elements: CardItem[]) => {
+    return shuffle(elements)
+  }
 
   const onCardClick = (indexCard: number): void => {
     // Avoid user opening 3 cards at time
@@ -54,10 +56,16 @@ const Game: FunctionComponent = () => {
   }
 
   const onResetGame = () => {
+    const data = shuffleArray([
+      ...dummyData.entries.slice(0, 10),
+      ...dummyData.entries.slice(0, 10),
+    ])
+
     setHits(0)
     setMistakes(0)
     setOpenCards([])
     setMatchCards({})
+    setCards(data)
   }
 
   useEffect(() => {
@@ -69,6 +77,14 @@ const Game: FunctionComponent = () => {
       // show tooltip game is done
     }
   }, [matchCards])
+
+  useEffect(() => {
+    const data = shuffleArray([
+      ...dummyData.entries.slice(0, 10),
+      ...dummyData.entries.slice(0, 10),
+    ])
+    setCards(data)
+  }, [])
 
   return (
     <div className="game container">
