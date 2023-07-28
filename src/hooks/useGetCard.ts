@@ -22,6 +22,7 @@ const useGetCards = (): UseGetCardsT => {
       setError(false)
       setIsLoading(true)
 
+      // Better if use .env, but for this test I'm not using .env
       const response = await fetch(
         'https://fed-team.modyo.cloud/api/content/spaces/animals/types/game/entries?per_page=20',
       )

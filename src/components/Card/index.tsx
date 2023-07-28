@@ -24,6 +24,7 @@ const Card: FunctionComponent<CardT> = ({ card, onClick, isFlipped, isMatched })
     >
       <div
         onClick={handleClick}
+        data-testid={card.fields.image.title}
         className="card-item__image-container card-item__image-container-front"
       >
         <img
