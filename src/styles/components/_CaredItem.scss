@@ -1,4 +1,24 @@
 .card-item {
+  height: 100px;
+  transition: 0.3s;
+  position: relative;
+  transform-style: preserve-3d;
+
+  &--flipped {
+    transform: rotateY(180deg);
+  }
+
+  &__image-container {
+    left: 0;
+    right: 0;
+    position: absolute;
+    backface-visibility: hidden;
+  }
+
+  &__image-container-back {
+    transform: rotateY(180deg);
+  }
+
   &__image {
     width: 100px;
     height: 100px;
