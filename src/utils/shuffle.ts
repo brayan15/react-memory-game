@@ -1,6 +1,4 @@
-import { CardItem } from 'src/types'
-
-export const shuffle = (array: CardItem[]): CardItem[] => {
+export const shuffle = (array: unknown[]): unknown[] => {
   const shuffleArray = array.slice()
 
   for (let i = shuffleArray.length - 1; i > 0; i--) {

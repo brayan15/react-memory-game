@@ -66,7 +66,7 @@ const Game: FunctionComponent = () => {
     const data = shuffleArray([
       ...dummyData.entries.slice(0, 10),
       ...dummyData.entries.slice(0, 10),
-    ])
+    ]) as CardItem[]
 
     setHits(0)
     setMistakes(0)
@@ -90,7 +90,8 @@ const Game: FunctionComponent = () => {
     const data = shuffleArray([
       ...dummyData.entries.slice(0, 10),
       ...dummyData.entries.slice(0, 10),
-    ])
+    ]) as CardItem[]
+
     setCards(data)
   }, [])
 
