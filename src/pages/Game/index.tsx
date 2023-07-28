@@ -2,9 +2,9 @@ import React, { useEffect, useState, FunctionComponent } from 'react'
 
 import { CardItem } from 'src/types'
 import Card from 'src/components/Card'
-import { dummyData } from 'src/utils/dummy'
 import { shuffle } from 'src/utils/shuffle'
 import { useLocation } from 'react-router-dom'
+import useGetCards from 'src/hooks/useGetCard'
 
 type LocationState = {
   state: {
@@ -13,6 +13,8 @@ type LocationState = {
 }
 
 const Game: FunctionComponent = () => {
+  const { getCards, error, isLoading, cards: cardsData } = useGetCards()
+
   const [hits, setHits] = useState<number>(0)
   const location = useLocation() as LocationState
   const [cards, setCards] = useState<CardItem[]>([])
@@ -63,10 +65,7 @@ const Game: FunctionComponent = () => {
   }
 
   const onResetGame = () => {
-    const data = shuffleArray([
-      ...dummyData.entries.slice(0, 10),
-      ...dummyData.entries.slice(0, 10),
-    ]) as CardItem[]
+    const data = shuffleArray([...cardsData.slice(0, 10), ...cardsData.slice(0, 10)]) as CardItem[]
 
     setHits(0)
     setMistakes(0)
@@ -87,18 +86,34 @@ const Game: FunctionComponent = () => {
   }, [matchCards])
 
   useEffect(() => {
-    const data = shuffleArray([
-      ...dummyData.entries.slice(0, 10),
-      ...dummyData.entries.slice(0, 10),
-    ]) as CardItem[]
+    const data = shuffleArray([...cardsData.slice(0, 10), ...cardsData.slice(0, 10)]) as CardItem[]
 
     setCards(data)
+  }, [cardsData])
+
+  useEffect(() => {
+    void getCards()
   }, [])
+
+  if (error) {
+    return (
+      <div className="game container">
+        <h1 className="text-center">There is an error, please try again!</h1>
+      </div>
+    )
+  }
 
   return (
     <div className="game container">
       <p className="text-success">Hits: {hits}</p>
       <p className="text-danger">Mistakes: {mistakes}</p>
+      {isLoading && (
+        <div className="d-flex justify-content-center">
+          <div className="spinner-border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      )}
       {gameIsDone && (
         <div
           role="alert"
