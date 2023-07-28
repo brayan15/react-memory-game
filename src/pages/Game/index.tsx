@@ -3,8 +3,10 @@ import React, { useEffect, useState, FunctionComponent } from 'react'
 import { CardItem } from 'src/types'
 import Card from 'src/components/Card'
 import { dummyData } from 'src/utils/dummy'
+//import { useLocation } from 'react-router-dom'
 
 const Game: FunctionComponent = () => {
+  //const location = useLocation()
   const [cards] = useState<CardItem[]>([
     ...dummyData.entries.slice(0, 3),
     ...dummyData.entries.slice(0, 3),

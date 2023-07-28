@@ -5,6 +5,7 @@ import Game from 'src/pages/Game'
 import Home from 'src/pages/Home'
 import Nav from 'src/components/Nav'
 import Footer from 'src/components/Footer'
+import ProtectedRoute from 'src/pages/ProtectedRoute'
 
 function App(): React.JSX.Element {
   return (
@@ -14,10 +15,16 @@ function App(): React.JSX.Element {
         <main className="app__main">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/game" element={<Game />} />
+            <Route
+              path="/game"
+              element={
+                <ProtectedRoute>
+                  <Game />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </main>
-
         <Footer />
       </div>
     </Router>
