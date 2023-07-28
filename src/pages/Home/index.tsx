@@ -14,20 +14,24 @@ const Home: FunctionComponent = () => {
       <div className="container">
         <h1>Welcome to Memory Game</h1>
         <p>Please write your name to start the game</p>
-        <div className="form-floating mb-3">
-          <input
-            id="name"
-            type="text"
-            placeholder="Name"
-            className="form-control"
-            onChange={(e) => setName(e.target.value)}
-          />
-          <label htmlFor="name">Name</label>
-        </div>
-        <div className="d-flex justify-content-center">
-          <button className="btn btn-primary" disabled={!name} onClick={onRedirect}>
-            Start!
-          </button>
+        <div className="row justify-content-md-center">
+          <div className="col-12 col-md-8">
+            <div className="form-floating mb-3">
+              <input
+                id="name"
+                type="text"
+                placeholder="Name"
+                className="form-control"
+                onChange={(e) => setName(e.target.value)}
+              />
+              <label htmlFor="name">Name</label>
+            </div>
+            <div className="d-flex justify-content-center">
+              <button className="btn btn-primary" disabled={!name} onClick={onRedirect}>
+                Start!
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

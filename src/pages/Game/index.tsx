@@ -4,14 +4,21 @@ import { CardItem } from 'src/types'
 import Card from 'src/components/Card'
 import { dummyData } from 'src/utils/dummy'
 import { shuffle } from 'src/utils/shuffle'
-//import { useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
+
+type LocationState = {
+  state: {
+    name: string
+  }
+}
 
 const Game: FunctionComponent = () => {
-  //const location = useLocation()
-  const [cards, setCards] = useState<CardItem[]>([])
-  const [openCards, setOpenCards] = useState<number[]>([])
   const [hits, setHits] = useState<number>(0)
+  const location = useLocation() as LocationState
+  const [cards, setCards] = useState<CardItem[]>([])
   const [mistakes, setMistakes] = useState<number>(0)
+  const [openCards, setOpenCards] = useState<number[]>([])
+  const [gameIsDone, setGameIsDone] = useState<boolean>(false)
   const [matchCards, setMatchCards] = useState<Record<string, boolean>>({})
 
   const shuffleArray = (elements: CardItem[]) => {
@@ -63,9 +70,10 @@ const Game: FunctionComponent = () => {
 
     setHits(0)
     setMistakes(0)
+    setCards(data)
     setOpenCards([])
     setMatchCards({})
-    setCards(data)
+    setGameIsDone(false)
   }
 
   useEffect(() => {
@@ -73,8 +81,8 @@ const Game: FunctionComponent = () => {
   }, [openCards])
 
   useEffect(() => {
-    if (Object.keys(matchCards).length === cards.length / 2) {
-      // show tooltip game is done
+    if (!!cards.length && Object.keys(matchCards).length === cards.length / 2) {
+      setGameIsDone(true)
     }
   }, [matchCards])
 
@@ -90,6 +98,19 @@ const Game: FunctionComponent = () => {
     <div className="game container">
       <p className="text-success">Hits: {hits}</p>
       <p className="text-danger">Mistakes: {mistakes}</p>
+      {gameIsDone && (
+        <div
+          role="alert"
+          aria-atomic="true"
+          aria-live="assertive"
+          className="toast show align-items-center text-white bg-success border-0 w-100"
+        >
+          <div className="d-flex">
+            <div className="toast-body">Well done {location.state.name}!</div>
+          </div>
+        </div>
+      )}
+
       <ul className="row gy-3 list-unstyled mb-0 mt-4">
         {cards.map((card, index) => (
           <li key={index} className="col-6 col-md-3">
