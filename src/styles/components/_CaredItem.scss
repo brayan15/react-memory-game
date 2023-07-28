@@ -4,7 +4,8 @@
   position: relative;
   transform-style: preserve-3d;
 
-  &--flipped {
+  &--flipped,
+  &--matched {
     transform: rotateY(180deg);
   }
 

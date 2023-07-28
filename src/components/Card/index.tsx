@@ -5,12 +5,27 @@ import img from 'src/assets/question-mark.png'
 
 type CardT = {
   card: CardItem
+  isFlipped: boolean
+  isMatched: boolean
+  onClick: () => void
 }
 
-const Card: FunctionComponent<CardT> = ({ card }) => {
+const Card: FunctionComponent<CardT> = ({ card, onClick, isFlipped, isMatched }) => {
+  const handleClick = (): void => {
+    if (isFlipped || isMatched) return
+    void onClick()
+  }
+
   return (
-    <div className="card-item">
-      <div className="card-item__image-container card-item__image-container-front">
+    <div
+      className={`card-item ${isFlipped ? 'card-item--flipped' : ''} ${
+        isMatched ? 'card-item--matched' : ''
+      }`}
+    >
+      <div
+        onClick={handleClick}
+        className="card-item__image-container card-item__image-container-front"
+      >
         <img
           src={img}
           alt="question mark"
