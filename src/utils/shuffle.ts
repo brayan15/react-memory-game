@@ -1,4 +1,10 @@
-export const shuffle = (array: unknown[]): unknown[] => {
+import { CardItem } from 'src/types'
+
+function shuffle(array: number[]): number[]
+
+function shuffle(array: CardItem[]): CardItem[]
+
+function shuffle(array: unknown[]): unknown[] {
   const shuffleArray = array.slice()
 
   for (let i = shuffleArray.length - 1; i > 0; i--) {
@@ -12,3 +18,5 @@ export const shuffle = (array: unknown[]): unknown[] => {
 
   return shuffleArray
 }
+
+export { shuffle }

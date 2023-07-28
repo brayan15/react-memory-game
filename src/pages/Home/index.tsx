@@ -27,7 +27,13 @@ const Home: FunctionComponent = () => {
               <label htmlFor="name">Name</label>
             </div>
             <div className="d-flex justify-content-center">
-              <button className="btn btn-primary" disabled={!name} onClick={onRedirect}>
+              <button
+                role="button"
+                disabled={!name}
+                onClick={onRedirect}
+                aria-label="start game"
+                className="btn btn-primary"
+              >
                 Start!
               </button>
             </div>

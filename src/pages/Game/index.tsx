@@ -4,7 +4,7 @@ import { CardItem } from 'src/types'
 import Card from 'src/components/Card'
 import { shuffle } from 'src/utils/shuffle'
 import { useLocation } from 'react-router-dom'
-import useGetCards from 'src/hooks/useGetCard'
+import useGetCards from 'src/hooks/useGetCards'
 
 type LocationState = {
   state: {
@@ -65,7 +65,7 @@ const Game: FunctionComponent = () => {
   }
 
   const onResetGame = () => {
-    const data = shuffleArray([...cardsData.slice(0, 10), ...cardsData.slice(0, 10)]) as CardItem[]
+    const data = shuffleArray([...cardsData.slice(0, 10), ...cardsData.slice(0, 10)])
 
     setHits(0)
     setMistakes(0)
@@ -86,7 +86,7 @@ const Game: FunctionComponent = () => {
   }, [matchCards])
 
   useEffect(() => {
-    const data = shuffleArray([...cardsData.slice(0, 10), ...cardsData.slice(0, 10)]) as CardItem[]
+    const data = shuffleArray([...cardsData.slice(0, 10), ...cardsData.slice(0, 10)])
 
     setCards(data)
   }, [cardsData])
@@ -140,7 +140,12 @@ const Game: FunctionComponent = () => {
         ))}
       </ul>
       <div className="d-flex mt-4 justify-content-center">
-        <button onClick={onResetGame} className="btn btn-primary">
+        <button
+          role="button"
+          onClick={onResetGame}
+          aria-label="restart game"
+          className="btn btn-primary"
+        >
           Restart game
         </button>
       </div>
